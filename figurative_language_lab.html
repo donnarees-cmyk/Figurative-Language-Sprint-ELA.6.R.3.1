@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figurative Language & Tone Studio | ELA.6.R.3.1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --accent-purple: #a855f7;
+      --accent-pink: #ec4899;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-yellow: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 80%);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+      color: white;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      min-width: 140px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 12px;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .lab-section {
+      display: none;
+    }
+
+    .lab-section.active {
+      display: block;
+      animation: fadeIn 0.35s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fig-highlight {
+      background: rgba(245, 158, 11, 0.25);
+      color: #fbbf24;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      border-bottom: 2px solid #f59e0b;
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      width: 100%;
+    }
+
+    .option-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-cyan);
+    }
+
+    .option-btn.selected-correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: var(--accent-green) !important;
+      color: #34d399 !important;
+    }
+
+    .option-btn.selected-wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: #ef4444 !important;
+      color: #f87171 !important;
+    }
+
+    .feedback-box {
+      padding: 16px;
+      border-radius: 14px;
+      margin-top: 16px;
+      display: none;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .feedback-box.correct {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-green);
+      color: #34d399;
+      display: block;
+    }
+
+    .feedback-box.wrong {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #f87171;
+      display: block;
+    }
+
+    .action-btn {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+    }
+
+    .slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #334155;
+      outline: none;
+      accent-color: var(--accent-pink);
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8">
+
+  <header class="w-full max-w-4xl text-center mb-6">
+    <span class="badge mb-3">Florida B.E.S.T. Standard ELA.6.R.3.1</span>
+    <h1 class="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-300 to-purple-400 mb-2">
+      ⚡ Figurative Language & Tone Studio
+    </h1>
+    <p class="text-slate-400 text-sm md:text-base">
+      Extensive Interactive Learning Lab & Benchmark Studio (35–45 Mins)
+    </p>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
+    <button class="nav-btn active" onclick="switchLab(1)">Lab 1: Device Spotter</button>
+    <button class="nav-btn" onclick="switchLab(2)">Lab 2: Tone Transformer</button>
+    <button class="nav-btn" onclick="switchLab(3)">Lab 3: Meaning Analyzer</button>
+    <button class="nav-btn" onclick="switchLab(4)">Final Mastery Quiz</button>
+  </nav>
+
+  <!-- Main Application Container -->
+  <main class="w-full max-w-4xl glass-card p-5 md:p-8 shadow-2xl relative">
+
+    <!-- LAB 1 -->
+    <section id="lab1" class="lab-section active">
+      <div class="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-6">
+        <div>
+          <h2 class="text-xl md:text-2xl font-extrabold text-cyan-400 flex items-center gap-2">
+            <span>🔍 Lab 1: Figurative Device Spotter</span>
+          </h2>
+          <p class="text-xs md:text-sm text-slate-400 mt-1">Identify the specific figurative language device used in each real-world text snippet (10 Questions).</p>
+        </div>
+        <span class="text-xs font-bold text-cyan-300 bg-cyan-950/80 border border-cyan-500/30 px-3 py-1.5 rounded-full">
+          Question <span id="l1-count">1</span> of 10
+        </span>
+      </div>
+
+      <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 mb-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold text-purple-300 bg-purple-950/80 border border-purple-500/30 px-2.5 py-1 rounded-lg" id="l1-source">
+            @GamingLegend12
+          </span>
+          <span class="text-xs font-bold text-slate-400" id="l1-score-tracker">Score: 0 / 0</span>
+        </div>
+        <p class="text-base md:text-lg font-semibold leading-relaxed" id="l1-text">
+          <!-- Populated by JS -->
+        </p>
+      </div>
+
+      <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Select the correct device:</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6" id="l1-options">
+        <!-- JS Options -->
+      </div>
+
+      <div id="l1-feedback" class="feedback-box"></div>
+
+      <div class="flex justify-end mt-6">
+        <button id="l1-next-btn" class="action-btn" style="display:none;" onclick="nextL1Question()">
+          Next Snippet →
+        </button>
+      </div>
+    </section>
+
+    <!-- LAB 2 -->
+    <section id="lab2" class="lab-section">
+      <div class="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-6">
+        <div>
+          <h2 class="text-xl md:text-2xl font-extrabold text-pink-400 flex items-center gap-2">
+            <span>🎭 Lab 2: The Tone Transformer Studio</span>
+          </h2>
+          <p class="text-xs md:text-sm text-slate-400 mt-1">Adjust sliders to transform tone, then answer the analysis question for each scenario (6 Scenarios).</p>
+        </div>
+        <span class="text-xs font-bold text-pink-300 bg-pink-950/80 border border-pink-500/30 px-3 py-1.5 rounded-full">
+          Scenario <span id="l2-count">1</span> of 6
+        </span>
+      </div>
+
+      <!-- Interactive Scenario Display -->
+      <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 mb-6 border-l-4 border-l-pink-500">
+        <span class="text-xs font-bold text-pink-400 tracking-wider uppercase block mb-2" id="l2-scenario-title">
+          SCENARIO 1: POP QUIZ ANNOUNCEMENT
+        </span>
+        <p class="text-lg md:text-xl font-bold text-slate-100 min-h-[60px] flex items-center" id="l2-sentence">
+          <!-- JS fills this -->
+        </p>
+      </div>
+
+      <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <label class="text-xs font-bold text-slate-300 uppercase tracking-wider">Adjust Figurative Tone Level:</label>
+          <span class="text-xs font-extrabold text-pink-400 bg-pink-950/60 px-2.5 py-1 rounded-md border border-pink-500/30" id="l2-level-tag">
+            Level 1: Sarcastic
+          </span>
+        </div>
+        <input type="range" id="toneSlider" class="slider my-3" min="1" max="3" value="1" oninput="updateToneLab(this.value)" />
+        <div class="flex justify-between text-xs font-bold text-slate-400">
+          <span id="label-lvl1">1. Sarcastic</span>
+          <span id="label-lvl2">2. Dramatic</span>
+          <span id="label-lvl3">3. Confident</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-700 text-sm font-semibold text-slate-200 mb-6" id="l2-analysis">
+        <!-- JS fills analysis -->
+      </div>
+
+      <!-- Check for understanding question -->
+      <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800 mb-6">
+        <p class="text-sm font-bold text-slate-100 mb-3" id="l2-q-prompt">Check for Understanding Question</p>
+        <div class="grid grid-cols-1 gap-2" id="l2-q-options">
+          <!-- JS options -->
+        </div>
+        <div id="l2-feedback" class="feedback-box mt-3"></div>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <button class="action-btn bg-slate-800 hover:bg-slate-700 text-slate-200" onclick="prevL2Scenario()">
+          ← Previous Scenario
+        </button>
+        <button id="l2-next-btn" class="action-btn" style="display:none;" onclick="nextL2Scenario()">
+          Next Scenario →
+        </button>
+      </div>
+    </section>
+
+    <!-- LAB 3 -->
+    <section id="lab3" class="lab-section">
+      <div class="flex items-center justify-between border-b border-slate-700/60 pb-4 mb-6">
+        <div>
+          <h2 class="text-xl md:text-2xl font-extrabold text-purple-400 flex items-center gap-2">
+            <span>🧠 Lab 3: Deep Meaning & Impact Analyzer</span>
+          </h2>
+          <p class="text-xs md:text-sm text-slate-400 mt-1">Analyze rich modern passages using Part A (Meaning) and Part B (Tone Impact) questions (6 Case Studies).</p>
+        </div>
+        <span class="text-xs font-bold text-purple-300 bg-purple-950/80 border border-purple-500/30 px-3 py-1.5 rounded-full">
+          Passage <span id="l3-count">1</span> of 6
+        </span>
+      </div>
+
+      <!-- Passage Card -->
+      <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 mb-6 border-l-4 border-l-purple-500">
+        <p class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-2" id="l3-passage-tag">GROUP CHAT CHAOS</p>
+        <p class="text-base md:text-lg font-medium leading-relaxed text-slate-200" id="l3-passage-text">
+          <!-- JS dynamic passage -->
+        </p>
+      </div>
+
+      <!-- Multi-Part Questions -->
+      <div class="space-y-6 mb-6">
+        <!-- Question Part A -->
+        <div>
+          <p class="text-sm font-bold text-slate-100 mb-3" id="l3-qa-prompt">Part A: What does the figurative expression mean?</p>
+          <div class="grid grid-cols-1 gap-2" id="l3-qa-options">
+            <!-- Options filled by JS -->
+          </div>
+        </div>
+
+        <!-- Question Part B -->
+        <div id="l3-qb-container" class="hidden">
+          <p class="text-sm font-bold text-slate-100 mb-3" id="l3-qb-prompt">Part B: How does this figure of speech affect the overall TONE?</p>
+          <div class="grid grid-cols-1 gap-2" id="l3-qb-options">
+            <!-- Options filled by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div id="l3-feedback" class="feedback-box mb-6"></div>
+
+      <div class="flex justify-end">
+        <button id="l3-next-btn" class="action-btn" style="display:none;" onclick="nextL3Passage()">
+          Next Passage →
+        </button>
+      </div>
+    </section>
+
+    <!-- LAB 4: QUIZ -->
+    <section id="lab4" class="lab-section">
+      <div class="border-b border-slate-700/60 pb-4 mb-6">
+        <h2 class="text-xl md:text-2xl font-extrabold text-emerald-400 flex items-center gap-2">
+          <span>🎯 Final Assessment: ELA.6.R.3.1 Benchmark Quiz</span>
+        </h2>
+        <p class="text-xs md:text-sm text-slate-400 mt-1">10 rigorous questions testing device identification, tone interpretation, and textual impact.</p>
+      </div>
+
+      <form id="quiz-form" class="space-y-6">
+        <!-- Quiz Q1 to Q10 -->
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">1. "The cafeteria sound level hit supersonic jet engine volume." Which device is used here?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q1" value="A"> Metaphor</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q1" value="B"> Hyperbole</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q1" value="C"> Personification</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">2. Read: "Her apology felt like ice water poured over an open flame." What tone is conveyed?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q2" value="A"> Cold, abrupt, and extinguishing</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q2" value="B"> Warm, comforting, and enthusiastic</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q2" value="C"> Silly, playful, and lighthearted</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">3. "Opportunity knocked loudly on his door, but he had his headphones in." What figure of speech is highlighted?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q3" value="A"> Idiom</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q3" value="B"> Personification</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q3" value="C"> Alliteration</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">4. Why do authors purposefully use figurative language in literary texts?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q4" value="A"> To make word counts longer for grading</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q4" value="B"> To create vivid imagery and shape emotional tone</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q4" value="C"> To confuse readers into re-reading paragraphs</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">5. "His new sneakers were bright white lightbulbs on the basketball court." What two things are being compared in this metaphor?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q5" value="A"> Basketball court and bright room</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q5" value="B"> Sneakers and lightbulbs</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q5" value="C"> Basketballs and lightbulbs</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">6. "The tired old laptop groaned and whined when opening thirty browser tabs." This personification suggests:</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q6" value="A"> The computer enjoys running many games</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q6" value="B"> The laptop is overloaded and struggling to operate</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q6" value="C"> The user needs to buy new headphones</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">7. "Her voice was silk, calming the anxious crowd in seconds." How does this metaphor impact the tone?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q7" value="A"> Creates a smooth, soothing, and reassuring tone</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q7" value="B"> Creates a harsh, irritating tone</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q7" value="C"> Creates a secretive, mysterious tone</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">8. "Biting off more than you can chew" is an example of which figurative device?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q8" value="A"> Idiom</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q8" value="B"> Onomatopoeia</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q8" value="C"> Simile</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">9. Read: "The news rained down like stones on their weekend plans." What tone does this simile create?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q9" value="A"> Heavy, damaging, and disappointing</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q9" value="B"> Lighthearted and comical</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q9" value="C"> Hopeful and inspiring</label>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+          <p class="text-sm font-bold text-slate-100 mb-3">10. "The thunder BOOMED and CRACKED above the rooftop." Which two devices are combined here?</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q10" value="A"> Onomatopoeia and Imagery</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q10" value="B"> Idiom and Metaphor</label>
+            <label class="option-btn text-xs font-semibold flex items-center gap-2"><input type="radio" name="q10" value="C"> Simile and Personification</label>
+          </div>
+        </div>
+
+        <button type="button" class="action-btn w-full py-4 rounded-xl text-base justify-center shadow-lg" onclick="gradeQuiz()">
+          Submit Final Quiz & Check Benchmark Mastery
+        </button>
+      </form>
+
+      <!-- Quiz Score Display -->
+      <div id="quiz-results" class="hidden text-center p-8 bg-slate-900/90 rounded-2xl border border-emerald-500/40">
+        <h3 class="text-2xl font-black text-emerald-400 mb-2">🎉 Studio Assessment Complete!</h3>
+        <p class="text-xs text-slate-400 mb-4">Florida B.E.S.T. Benchmark ELA.6.R.3.1 Summary</p>
+        <div class="text-5xl font-black text-cyan-400 mb-2" id="score-display">0 / 10</div>
+        <p class="text-lg font-bold text-purple-300 mb-1" id="percentage-display">0% (Grade: F)</p>
+        <p class="text-base font-semibold text-slate-200 mb-6" id="score-comment"></p>
+        <button class="action-btn bg-slate-800 hover:bg-slate-700 text-slate-200" onclick="resetStudio()">
+          🔄 Restart Studio Labs
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function switchLab(labNum) {
+      document.querySelectorAll('.lab-section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById('lab' + labNum).classList.add('active');
+      document.querySelectorAll('.nav-btn')[labNum - 1].classList.add('active');
+    }
+
+    // --- LAB 1 DATA (10 QUESTIONS) ---
+    const lab1Data = [
+      {
+        source: '@GamingLegend12 • Fortnite Stream',
+        text: '"My wifi today is <span class=\'fig-highlight\'>a literal turtle crawling uphill backwards</span>!"',
+        options: ['Metaphor', 'Simile', 'Onomatopoeia', 'Personification'],
+        correct: 'Metaphor',
+        explanation: 'Correct! It directly equates wifi speed to a turtle without using "like" or "as".'
+      },
+      {
+        source: '@TrackStar_Mia • Track Practice',
+        text: '"When the starter pistol fired, she took off <span class=\'fig-highlight\'>like a launched rocket</span>."',
+        options: ['Hyperbole', 'Simile', 'Idiom', 'Alliteration'],
+        correct: 'Simile',
+        explanation: 'Spot on! It compares her sprint speed to a rocket using "like".'
+      },
+      {
+        source: '@StudyMode • Group Chat',
+        text: '"My phone notification bell <span class=\'fig-highlight\'>screamed at me</span> to finish my homework."',
+        options: ['Personification', 'Metaphor', 'Simile', 'Idiom'],
+        correct: 'Personification',
+        explanation: 'Great job! An inanimate phone bell is given the human action of "screaming".'
+      },
+      {
+        source: '@MemeCentral • Lunchroom Chatter',
+        text: '"I’ve told you <span class=\'fig-highlight\'>a billion times</span> not to drop my airpods in the soup!"',
+        options: ['Hyperbole', 'Personification', 'Simile', 'Metaphor'],
+        correct: 'Hyperbole',
+        explanation: 'Excellently spotted! Exaggerating to "a billion times" is hyperbole.'
+      },
+      {
+        source: '@ArtClub_Leo • Art Room',
+        text: '"The paintbrush was <span class=\'fig-highlight\'>a dancing wand</span> across the blank canvas."',
+        options: ['Metaphor', 'Simile', 'Onomatopoeia', 'Hyperbole'],
+        correct: 'Metaphor',
+        explanation: 'Correct! Directly stating the brush is a wand creates a vivid metaphor.'
+      },
+      {
+        source: '@TechSavvy • Discord',
+        text: '"Don’t worry about the science exam, it’s going to be <span class=\'fig-highlight\'>a piece of cake</span>."',
+        options: ['Idiom', 'Personification', 'Alliteration', 'Onomatopoeia'],
+        correct: 'Idiom',
+        explanation: 'Correct! "A piece of cake" is an idiom meaning easy, not literal food.'
+      },
+      {
+        source: '@Hoops_Jayden • Gym Class',
+        text: '"The basketball went <span class=\'fig-highlight\'>SWOOSH</span> right through the net at the buzzer!"',
+        options: ['Onomatopoeia', 'Simile', 'Metaphor', 'Idiom'],
+        correct: 'Onomatopoeia',
+        explanation: 'Bingo! "SWOOSH" imitates the actual sound of the basketball.'
+      },
+      {
+        source: '@PoetrySquad • ELA Class',
+        text: '"<span class=\'fig-highlight\'>Peter picked purple plums</span> for the school bake sale."',
+        options: ['Alliteration', 'Hyperbole', 'Personification', 'Simile'],
+        correct: 'Alliteration',
+        explanation: 'Correct! Repeating the initial "P" sound creates alliteration.'
+      },
+      {
+        source: '@DramaClub • Auditorium',
+        text: '"The spotlight <span class=\'fig-highlight\'>hugged the lead actor</span> as the music faded."',
+        options: ['Personification', 'Metaphor', 'Hyperbole', 'Idiom'],
+        correct: 'Personification',
+        explanation: 'Correct! Giving light the human ability to "hug" is personification.'
+      },
+      {
+        source: '@ChefGabe • Culinary Class',
+        text: '"The hot pizza cheese stretched <span class=\'fig-highlight\'>as long as a highway</span>."',
+        options: ['Simile', 'Metaphor', 'Alliteration', 'Personification'],
+        correct: 'Simile',
+        explanation: 'Great job! Comparing cheese length to a highway using "as" is a simile.'
+      }
+    ];
+
+    let l1Index = 0;
+    let l1Score = 0;
+
+    function renderL1() {
+      const q = lab1Data[l1Index];
+      document.getElementById('l1-count').innerText = l1Index + 1;
+      document.getElementById('l1-source').innerText = q.source;
+      document.getElementById('l1-text').innerHTML = q.text;
+      document.getElementById('l1-score-tracker').innerText = `Score: ${l1Score} / ${l1Index}`;
+
+      const optsContainer = document.getElementById('l1-options');
+      optsContainer.innerHTML = '';
+      document.getElementById('l1-feedback').className = 'feedback-box';
+      document.getElementById('l1-feedback').style.display = 'none';
+      document.getElementById('l1-next-btn').style.display = 'none';
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkL1(btn, opt);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function checkL1(btn, selected) {
+      const q = lab1Data[l1Index];
+      const feedback = document.getElementById('l1-feedback');
+      document.querySelectorAll('#l1-options .option-btn').forEach(b => b.style.pointerEvents = 'none');
+
+      if (selected === q.correct) {
+        btn.classList.add('selected-correct');
+        feedback.className = 'feedback-box correct';
+        feedback.innerText = q.explanation;
+        l1Score++;
+      } else {
+        btn.classList.add('selected-wrong');
+        feedback.className = 'feedback-box wrong';
+        feedback.innerText = `Not quite! The correct device was ${q.correct}. ${q.explanation}`;
+      }
+
+      document.getElementById('l1-score-tracker').innerText = `Score: ${l1Score} / ${l1Index + 1}`;
+      document.getElementById('l1-next-btn').style.display = 'inline-flex';
+    }
+
+    function nextL1Question() {
+      l1Index++;
+      if (l1Index < lab1Data.length) {
+        renderL1();
+      } else {
+        switchLab(2);
+      }
+    }
+
+    // --- LAB 2 DATA (6 SCENARIOS) ---
+    const lab2Data = [
+      {
+        title: 'SCENARIO 1: POP QUIZ ANNOUNCEMENT',
+        l1: '1. Sarcastic', l2: '2. Dramatic', l3: '3. Confident',
+        levels: {
+          1: { text: '"Walking into math, the pop quiz felt like a surprise party nobody asked for."', tone: 'Sarcastic / Mocking', analysis: 'Uses a playful, sarcastic simile comparing an unwanted test to a party.' },
+          2: { text: '"Walking into math, the pop quiz was a dark thundercloud hanging over my week."', tone: 'Dramatic / Anxious', analysis: 'Uses a storm metaphor to amplify feelings of dread and anxiety.' },
+          3: { text: '"Walking into math, my brain was a turbocharged engine ready to crush the quiz."', tone: 'Confident / Energized', analysis: 'Compares the mind to a high-powered engine to express readiness.' }
+        },
+        qPrompt: 'Which key phrase drives the SARCASTIC tone in Level 1?',
+        options: [
+          { text: '"surprise party nobody asked for"', correct: true },
+          { text: '"dark thundercloud hanging"', correct: false },
+          { text: '"turbocharged engine ready"', correct: false }
+        ]
+      },
+      {
+        title: 'SCENARIO 2: LUNCHROOM SEATING',
+        l1: '1. Nervous', l2: '2. Welcoming', l3: '3. Chaotic',
+        levels: {
+          1: { text: '"The crowded lunchroom was a minefield as I hunted for an open seat."', tone: 'Nervous / Tense', analysis: 'Comparing the lunchroom to a minefield highlights social stress and anxiety.' },
+          2: { text: '"The lunchroom was a warm beacon calling all hungry students inside."', tone: 'Welcoming / Inviting', analysis: 'Personifying the room as a beacon creates a comforting, friendly tone.' },
+          3: { text: '"The cafeteria erupted like a volcano when the bell rang for lunch."', tone: 'Chaotic / Wild', analysis: 'A simile comparing noise to a volcano conveys loud, uncontrolled energy.' }
+        },
+        qPrompt: 'Why does describing the lunchroom as a "minefield" shift the tone to tense/nervous?',
+        options: [
+          { text: 'It implies danger, fear of making a mistake, and walking carefully.', correct: true },
+          { text: 'It means students are eating explosive snacks at lunch.', correct: false },
+          { text: 'It suggests the food tastes delicious and hot.', correct: false }
+        ]
+      },
+      {
+        title: 'SCENARIO 3: BASKETBALL PRACTICE',
+        l1: '1. Exhausted', l2: '2. Determined', l3: '3. Playful',
+        levels: {
+          1: { text: '"My legs were lead bricks dragging across the gym floor during suicides."', tone: 'Exhausted / Heavy', analysis: 'Metaphorically describing legs as lead bricks conveys heavy physical fatigue.' },
+          2: { text: '"My eyes were laser beams locked onto the rim with every jump shot."', tone: 'Determined / Focused', analysis: 'Comparing eyes to laser beams stresses intense focus and resolve.' },
+          3: { text: '"The basketball danced on the rim before giggling into the net."', tone: 'Playful / Whimsical', analysis: 'Personifying the ball gives the practice drill a lighthearted feel.' }
+        },
+        qPrompt: 'Which device creates the EXHAUSTED tone in Level 1?',
+        options: [
+          { text: 'Metaphor comparing legs to "lead bricks"', correct: true },
+          { text: 'Simile comparing eyes to "laser beams"', correct: false },
+          { text: 'Personification of the basketball "giggling"', correct: false }
+        ]
+      },
+      {
+        title: 'SCENARIO 4: SUBMITTING PROJECT ON CANVAS',
+        l1: '1. Relieved', l2: '2. Stressed', l3: '3. Triumphant',
+        levels: {
+          1: { text: '"Hitting submit felt like taking off a 50-pound backpack after a long hike."', tone: 'Relieved / Peaceful', analysis: 'A simile expressing physical lightness to convey mental relief.' },
+          2: { text: '"The submission clock was a ticking bomb counting down my doom."', tone: 'Stressed / Urgent', analysis: 'Personifying time as a ticking bomb creates intense suspense.' },
+          3: { text: '"I submitted my project like a king claiming his rightful trophy."', tone: 'Triumphant / Proud', analysis: 'A simile comparing submission to royalty emphasizes victory.' }
+        },
+        qPrompt: 'How does the phrase "ticking bomb counting down my doom" impact tone?',
+        options: [
+          { text: 'Creates extreme stress and time pressure', correct: true },
+          { text: 'Creates a relaxed and sleepy mood', correct: false },
+          { text: 'Shows that the assignment is about history', correct: false }
+        ]
+      },
+      {
+        title: 'SCENARIO 5: FORGOTTEN HOMEWORK ASSIGNMENT',
+        l1: '1. Panic', l2: '2. Defensive', l3: '3. Humorous',
+        levels: {
+          1: { text: '"Realizing my backpack was empty, my stomach dropped into a bottomless ocean."', tone: 'Panicked / Shocked', analysis: 'Hyperbole describing stomach dropping conveys instant panic.' },
+          2: { text: '"The missing worksheet was a shadow, slipping away when I needed it most."', tone: 'Defensive / Unfortunate', analysis: 'Metaphor framing the assignment as slippery and elusive.' },
+          3: { text: '"My homework performed a magic trick and vanished into thin air."', tone: 'Humorous / Lighthearted', analysis: 'Personification/Idiom lightens the severity of the mistake.' }
+        },
+        qPrompt: 'Which quote best creates a PANICKED tone?',
+        options: [
+          { text: '"my stomach dropped into a bottomless ocean"', correct: true },
+          { text: '"performed a magic trick and vanished"', correct: false },
+          { text: '"slipping away when I needed it"', correct: false }
+        ]
+      },
+      {
+        title: 'SCENARIO 6: RAINY DAY PRACTICE CANCELLATION',
+        l1: '1. Gloomy', l2: '2. Ecstatic', l3: '3. Annoyed',
+        levels: {
+          1: { text: '"The dark rain wept endlessly against the window, washing away our weekend game."', tone: 'Gloomy / Sorrowful', analysis: 'Personifying rain as weeping aligns weather with disappointment.' },
+          2: { text: '"The rain bell rang like freedom music, granting us a surprise day off."', tone: 'Ecstatic / Celebratory', analysis: 'Simile comparing rain sounds to freedom music creates joy.' },
+          3: { text: '"The sky threw a temper tantrum and ruined our hard-earned practice schedule."', tone: 'Annoyed / Frustrated', analysis: 'Personifying sky throwing a tantrum emphasizes anger.' }
+        },
+        qPrompt: 'Why does Level 2 feel CELEBRATORY while Level 1 feels GLOOMY?',
+        options: [
+          { text: 'Level 2 compares rain to "freedom music" instead of personifying it as "weeping".', correct: true },
+          { text: 'Level 1 uses longer sentences than Level 2.', correct: false },
+          { text: 'Level 2 takes place indoors.', correct: false }
+        ]
+      }
+    ];
+
+    let l2Index = 0;
+
+    function renderL2() {
+      const data = lab2Data[l2Index];
+      document.getElementById('l2-count').innerText = l2Index + 1;
+      document.getElementById('l2-scenario-title').innerText = data.title;
+      document.getElementById('label-lvl1').innerText = data.l1;
+      document.getElementById('label-lvl2').innerText = data.l2;
+      document.getElementById('label-lvl3').innerText = data.l3;
+      document.getElementById('toneSlider').value = 1;
+      updateToneLab(1);
+
+      // Render Check Question
+      document.getElementById('l2-q-prompt').innerText = data.qPrompt;
+      const qContainer = document.getElementById('l2-q-options');
+      qContainer.innerHTML = '';
+      document.getElementById('l2-feedback').className = 'feedback-box';
+      document.getElementById('l2-feedback').style.display = 'none';
+      document.getElementById('l2-next-btn').style.display = 'none';
+
+      data.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt.text;
+        btn.onclick = () => checkL2Question(btn, opt.correct);
+        qContainer.appendChild(btn);
+      });
+    }
+
+    function updateToneLab(val) {
+      const currentScenario = lab2Data[l2Index];
+      const levelData = currentScenario.levels[val];
+
+      document.getElementById('l2-sentence').innerText = levelData.text;
+      document.getElementById('l2-level-tag').innerText = `Tone: ${levelData.tone}`;
+      document.getElementById('l2-analysis').innerHTML = `
+        <span class="text-pink-400 font-bold">Analysis:</span> ${levelData.analysis}
+      `;
+    }
+
+    function checkL2Question(btn, isCorrect) {
+      document.querySelectorAll('#l2-q-options .option-btn').forEach(b => b.style.pointerEvents = 'none');
+      const fb = document.getElementById('l2-feedback');
+
+      if (isCorrect) {
+        btn.classList.add('selected-correct');
+        fb.className = 'feedback-box correct';
+        fb.innerText = 'Spot on! You correctly identified the word choice that drives the tone!';
+      } else {
+        btn.classList.add('selected-wrong');
+        fb.className = 'feedback-box wrong';
+        fb.innerText = 'Incorrect. Pay close attention to how specific adjectives and figures of speech alter feelings.';
+      }
+      fb.style.display = 'block';
+      document.getElementById('l2-next-btn').style.display = 'inline-flex';
+    }
+
+    function nextL2Scenario() {
+      if (l2Index < lab2Data.length - 1) {
+        l2Index++;
+        renderL2();
+      } else {
+        switchLab(3);
+      }
+    }
+
+    function prevL2Scenario() {
+      if (l2Index > 0) {
+        l2Index--;
+        renderL2();
+      }
+    }
+
+    // --- LAB 3 DATA (6 CASE STUDIES) ---
+    const lab3Data = [
+      {
+        tag: 'GROUP CHAT CHAOS',
+        passage: '"Working on this history presentation with Marcus is like trying to carry a bowling ball up a slide. Every step forward takes double the effort and pulls us down."',
+        qA: {
+          prompt: 'Part A: What does the simile comparing Marcus to "carrying a bowling ball up a slide" mean?',
+          options: [
+            { text: 'Marcus is extremely strong and plays bowling.', correct: false },
+            { text: 'Working with Marcus is exhausting, slow, and full of friction.', correct: true },
+            { text: 'The group project is taking place at a playground.', correct: false }
+          ]
+        },
+        qB: {
+          prompt: 'Part B: How does this figure of speech affect the author\'s TONE?',
+          options: [
+            { text: 'It creates an exasperated and frustrated tone.', correct: true },
+            { text: 'It creates a joyful and celebratory tone.', correct: false },
+            { text: 'It creates a neutral, purely scientific tone.', correct: false }
+          ]
+        }
+      },
+      {
+        tag: 'BASKETBALL TRYOUTS',
+        passage: '"As coach walked out with the final roster sheet, silence suffocated the gymnasium. Everyone’s eyes were glued to the white paper."',
+        qA: {
+          prompt: 'Part A: What does the personification "silence suffocated the gymnasium" convey?',
+          options: [
+            { text: 'The gymnasium was suddenly destroyed by heavy wind.', correct: false },
+            { text: 'The quietness was so intense and heavy that it felt overpowering.', correct: true },
+            { text: 'The basketball coach asked everyone to stop talking loudly.', correct: false }
+          ]
+        },
+        qB: {
+          prompt: 'Part B: What tone is established through this personification?',
+          options: [
+            { text: 'A tense, suspenseful, and nerve-wracking tone.', correct: true },
+            { text: 'A peaceful, relaxing, and soothing tone.', correct: false },
+            { text: 'A silly, goofy, and comical tone.', correct: false }
+          ]
+        }
+      },
+      {
+        tag: 'CAFETERIA SCENE',
+        passage: '"When the famous pop star walked into our middle school cafeteria, the lunchroom erupted into a roaring zoo of shouts and dropped trays."',
+        qA: {
+          prompt: 'Part A: What does the metaphor "a roaring zoo" suggest about the room?',
+          options: [
+            { text: 'Actual wild animals were let loose in the school.', correct: false },
+            { text: 'The cafeteria became instantly wild, loud, and disorderly.', correct: true },
+            { text: 'Students were eating healthy vegetables for lunch.', correct: false }
+          ]
+        },
+        qB: {
+          prompt: 'Part B: Which word best describes the tone created by this metaphor?',
+          options: [
+            { text: 'Wildly excited and chaotic', correct: true },
+            { text: 'Gloomy and depressed', correct: false },
+            { text: 'Formal and serious', correct: false }
+          ]
+        }
+      },
+      {
+        tag: 'LOST PHONE PANIC',
+        passage: '"Reaching into my pocket and finding air, my heart turned into an anvil dropping straight to my feet."',
+        qA: {
+          prompt: 'Part A: What does the metaphor comparing the heart to an "anvil dropping" mean?',
+          options: [
+            { text: 'The speaker literally swallowed a piece of metal.', correct: false },
+            { text: 'The speaker experienced sudden, heavy dread upon losing their phone.', correct: true },
+            { text: 'The speaker felt excited to buy a new phone.', correct: false }
+          ]
+        },
+        qB: {
+          prompt: 'Part B: How does this metaphor impact the overall tone?',
+          options: [
+            { text: 'Conveys sudden panic and heavy shock', correct: true },
+            { text: 'Conveys calm reflection and patience', correct: false },
+            { text: 'Conveys mild humor and sarcasm', correct: false }
+          ]
+        }
+      },
+      {
+        tag: 'SCIENCE LAB MISHAP',
+        passage: '"The green potion bubbled furiously and hissed like an angry viper before spilling over the beaker edge."',
+        qA: {
+          prompt: 'Part A: What does the simile "hissed like an angry viper" mean?',
+          options: [
+            { text: 'The chemical reaction made a sharp noise, signaling potential danger.', correct: true },
+            { text: 'A real snake crawled out of the science lab sink.', correct: false },
+            { text: 'The beaker was made of real snake skin.', correct: false }
+          ]
+        },
+        qB: {
+          prompt: 'Part B: What tone does this simile create?',
+          options: [
+            { text: 'Threatening and volatile', correct: true },
+            { text: 'Sweet and welcoming', correct: false },
+            { text: 'Boring and predictable', correct: false }
+          ]
+        }
+      },
+      {
+        tag: 'FIRST DAY PRESENTATION',
+        passage: '"Standing at the podium, my words were paper airplanes caught in a hurricane, flying everywhere except where I wanted."',
+        qA: {
+          prompt: 'Part A: What does comparing words to "paper airplanes in a hurricane" imply?',
+          options: [
+            { text: 'The speaker’s speech was messy, uncontrolled, and chaotic.', correct: true },
+            { text: 'The speaker was folding origami during class.', correct: false },
+            { text: 'The classroom windows blew open during a storm.', correct: false }
+          ]
+        },
+        qB: {
+          prompt: 'Part B: What tone is emphasized through this vivid comparison?',
+          options: [
+            { text: 'Flustered and overwhelmed', correct: true },
+            { text: 'Arrogant and bossy', correct: false },
+            { text: 'Sleepy and uninterested', correct: false }
+          ]
+        }
+      }
+    ];
+
+    let l3Index = 0;
+
+    function renderL3() {
+      const p = lab3Data[l3Index];
+      document.getElementById('l3-count').innerText = l3Index + 1;
+      document.getElementById('l3-passage-tag').innerText = p.tag;
+      document.getElementById('l3-passage-text').innerText = p.passage;
+
+      // Render Part A
+      document.getElementById('l3-qa-prompt').innerText = p.qA.prompt;
+      const optsA = document.getElementById('l3-qa-options');
+      optsA.innerHTML = '';
+      p.qA.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt.text;
+        btn.onclick = () => checkL3PartA(btn, opt.correct);
+        optsA.appendChild(btn);
+      });
+
+      document.getElementById('l3-qb-container').classList.add('hidden');
+      document.getElementById('l3-feedback').className = 'feedback-box';
+      document.getElementById('l3-feedback').style.display = 'none';
+      document.getElementById('l3-next-btn').style.display = 'none';
+    }
+
+    function checkL3PartA(btn, isCorrect) {
+      document.querySelectorAll('#l3-qa-options .option-btn').forEach(b => b.style.pointerEvents = 'none');
+      if (isCorrect) {
+        btn.classList.add('selected-correct');
+        renderL3PartB();
+      } else {
+        btn.classList.add('selected-wrong');
+        const fb = document.getElementById('l3-feedback');
+        fb.className = 'feedback-box wrong';
+        fb.innerText = 'Incorrect Part A answer. Look closely at the figurative comparison context!';
+        fb.style.display = 'block';
+      }
+    }
+
+    function renderL3PartB() {
+      const p = lab3Data[l3Index];
+      const containerB = document.getElementById('l3-qb-container');
+      containerB.classList.remove('hidden');
+
+      document.getElementById('l3-qb-prompt').innerText = p.qB.prompt;
+      const optsB = document.getElementById('l3-qb-options');
+      optsB.innerHTML = '';
+      p.qB.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt.text;
+        btn.onclick = () => checkL3PartB(btn, opt.correct);
+        optsB.appendChild(btn);
+      });
+    }
+
+    function checkL3PartB(btn, isCorrect) {
+      document.querySelectorAll('#l3-qb-options .option-btn').forEach(b => b.style.pointerEvents = 'none');
+      const fb = document.getElementById('l3-feedback');
+
+      if (isCorrect) {
+        btn.classList.add('selected-correct');
+        fb.className = 'feedback-box correct';
+        fb.innerText = '🌟 Excellent analysis! You accurately identified both the meaning and tone impact!';
+      } else {
+        btn.classList.add('selected-wrong');
+        fb.className = 'feedback-box wrong';
+        fb.innerText = 'Incorrect Part B answer. Consider how the word choices alter emotional mood.';
+      }
+
+      fb.style.display = 'block';
+      document.getElementById('l3-next-btn').style.display = 'inline-flex';
+    }
+
+    function nextL3Passage() {
+      l3Index++;
+      if (l3Index < lab3Data.length) {
+        renderL3();
+      } else {
+        switchLab(4);
+      }
+    }
+
+    // --- QUIZ LOGIC (10 QUESTIONS) ---
+    function gradeQuiz() {
+      const answers = {
+        q1: 'B', q2: 'A', q3: 'B', q4: 'B', q5: 'B',
+        q6: 'B', q7: 'A', q8: 'A', q9: 'A', q10: 'A'
+      };
+      let score = 0;
+
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+
+      const percent = (score / 10) * 100;
+      let grade = 'F';
+      if (percent >= 90) grade = 'A';
+      else if (percent >= 80) grade = 'B';
+      else if (percent >= 70) grade = 'C';
+      else if (percent >= 60) grade = 'D';
+
+      document.getElementById('quiz-form').classList.add('hidden');
+      const results = document.getElementById('quiz-results');
+      results.classList.remove('hidden');
+
+      document.getElementById('score-display').innerText = `${score} / 10`;
+      document.getElementById('percentage-display').innerText = `${percent}% (Grade: ${grade})`;
+      
+      const comment = document.getElementById('score-comment');
+      if (score >= 9) {
+        comment.innerText = '🏆 Outstanding Benchmark Mastery! You are a Figurative Language & Tone Expert!';
+      } else if (score >= 7) {
+        comment.innerText = '👍 Great Job! You demonstrate solid proficiency in Florida standard ELA.6.R.3.1.';
+      } else {
+        comment.innerText = '📘 Needs Practice. Review the labs above and re-take the studio assessment.';
+      }
+    }
+
+    function resetStudio() {
+      l1Index = 0;
+      l1Score = 0;
+      l2Index = 0;
+      l3Index = 0;
+      renderL1();
+      renderL2();
+      renderL3();
+      document.getElementById('quiz-form').reset();
+      document.getElementById('quiz-form').classList.remove('hidden');
+      document.getElementById('quiz-results').classList.add('hidden');
+      switchLab(1);
+    }
+
+    // Initialize all labs on load
+    window.onload = function() {
+      renderL1();
+      renderL2();
+      renderL3();
+    };
+  </script>
+</body>
+</html>
